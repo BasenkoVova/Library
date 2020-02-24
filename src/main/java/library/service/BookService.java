@@ -14,13 +14,6 @@ public class BookService {
     @Autowired
     private final BookRepository repository;
 
-//        @PostConstruct
-//    private void postConstruct() {
-//            repository.save(new Book(1002, "Монах, що продав свій фераарі", "Робін Шарма", "2015"));
-//            repository.save(new Book(1003, "Найбагатша людина у Вавилоні", "Джордж Клейсон", "2017"));
-//            repository.save(new Book(1004, "Стратегії геніїв", "Девід Йоффе, Майкл Кузумано", "2017"));
-//    }
-
 
     @Autowired
     public BookService(BookRepository repository) {

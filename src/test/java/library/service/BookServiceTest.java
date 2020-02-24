@@ -1,39 +1,43 @@
 package library.service;
 
+import javassist.NotFoundException;
 import library.TestDateUser;
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import library.model.Book;
 import library.model.User;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 import java.util.Set;
 
 import static library.TestDateBook.*;
-import static library.TestDateUser.*;
+import static library.TestDateUser.ADMIN;
+import static library.TestDateUser.USER;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class BookServiceTest extends AbstractServiceTest{
+class BookServiceTest extends AbstractServiceTest {
 
     @Autowired
     private BookService service;
 
     @Test
-    public void create() {
-        Book newBook = new Book(null, "7 звичок надзвичайно ефективних людей", "Стівен Кові", "2012");
+    void create() {
+        Book newBook = new Book(null, "7 звичок надзвичайно ефективних людей", "Стівен Кові", "2012",90);
         Book created = service.create(newBook);
         newBook.setId(created.getId());
         assertMatch(created, newBook);
     }
 
+
     @Test
-    public void delete() {
+    void delete() {
         service.delete(USER_BOOK_ID_1);
-//        assertThrows(NotFoundException.class, () ->
-//                service.delete(BOOK_ID));
+        assertThrows(NotFoundException.class, () ->
+                service.delete(USER_BOOK_ID_1));
     }
 
     @Test
-    public void get() {
+    void get() {
         Book book = service.get(USER_BOOK_ID_1);
         assertMatch(book, BOOK1);
     }
@@ -46,35 +50,32 @@ public class BookServiceTest extends AbstractServiceTest{
     }
 
 
-
-
     @Test
-    public void getByAuthor() {
+    void getByAuthor() {
         Book book = service.getByAuthor("Робін Шарма");
         assertMatch(book, BOOK1);
     }
 
     @Test
-    public void getAll() {
+    void getAll() {
         List<Book> all = service.getAll();
-        assertMatch(all, List.of(BOOK1, BOOK2,BOOK3));
+        assertMatch(all, List.of(BOOK1, BOOK2, BOOK3));
     }
 
     @Test
-    public void getAllByUsers()
-    {
+    void getAllByUsers() {
         Book all = service.getBookWithUsers(USER_BOOK_ID_1);
         Set<User> BookUsers = all.getUsers();
         TestDateUser.assertMatch(BookUsers, List.of(USER, ADMIN));
     }
 
 
-
     @Test
-    public void update() {
+    void update() {
         Book book = BOOK1;
         book.setName("Монах, що продав свій феррарі і придбав жигуля");
         Book updater = service.create(book);
         assertMatch(updater, book);
     }
+
 }

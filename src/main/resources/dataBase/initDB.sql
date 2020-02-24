@@ -29,7 +29,8 @@ CREATE TABLE books
     id     INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
     name   VARCHAR NOT NULL,
     date   VARCHAR NOT NULL,
-    author VARCHAR NOT NULL
+    author VARCHAR NOT NULL,
+    price  INTEGER NOT NULL
 --   FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );
 -- CREATE UNIQUE INDEX books_unique_user_date_idx

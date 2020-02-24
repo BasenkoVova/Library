@@ -24,10 +24,17 @@ public class Book extends AbstractNamedEntity {
     @Column(name = "date", nullable = false)
     private String date;
 
+
+    @Column(name = "price", nullable = false)
+    private Integer price;
+
+
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "books") //, cascade = CascadeType.ALL
-//    @CollectionTable(name = "book_user" )
-//    @Column(name = "user_id")
     private Set<User> users = new HashSet<>();
+
+
+
+
 
 
 
@@ -35,10 +42,11 @@ public class Book extends AbstractNamedEntity {
     public Book() {
     }
 
-    public Book(Integer id, String name, String author, String date) {
+    public Book(Integer id, String name, String author, String date, Integer price) {
         super(id, name);
         this.author = author;
         this.date = date;
+        this.price = price;
     }
 
 

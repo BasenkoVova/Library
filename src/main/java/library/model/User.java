@@ -38,7 +38,6 @@ public class User extends AbstractNamedEntity {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "book_id")
     )
-
     private Set<Book> books = new HashSet<>();
 
 
