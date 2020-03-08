@@ -64,10 +64,10 @@ public class UserServiceTest extends AbstractServiceTest {
     }
 
     @Test
-    void getUserWithBooks()
+    void getUserWithBooksUSER()
     {
-        User all = service.getUserWithBooks(USER_ID);
-        Set<Book> UserBooks = all.getBooks();
+        User user = service.getUserWithBooks(USER_ID);
+        Set<Book> UserBooks = user.getBooks();
         TestDateBook.assertMatch(UserBooks, List.of(BOOK1, BOOK2, BOOK3));
     }
 }

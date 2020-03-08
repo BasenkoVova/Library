@@ -36,9 +36,6 @@ public class Book extends AbstractNamedEntity {
 
 
 
-
-
-
     public Book() {
     }
 
@@ -49,6 +46,24 @@ public class Book extends AbstractNamedEntity {
         this.price = price;
     }
 
+    public Book(String name, String author, String date, Integer price) {
+        super(null, name);
+        this.author = author;
+        this.date = date;
+        this.price = price;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public Integer getPrice() {
+        return price;
+    }
 
     public Set<User> getUsers() {
         return users;

@@ -5,11 +5,10 @@ import org.springframework.util.CollectionUtils;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.Collection;
-import java.util.EnumSet;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Entity
@@ -31,6 +30,18 @@ public class User extends AbstractNamedEntity {
     private Set<Role> roles;
 
 
+//    @Column(name = "password", nullable = false)
+//    @NotBlank
+//    @Size(min = 5, max = 100)
+//    private String password;
+//
+//    @Column(name = "enabled", nullable = false, columnDefinition = "bool default true")
+//    private boolean enabled = true;
+//
+//    @Column(name = "registered", nullable = false, columnDefinition = "timestamp default now()")
+//    @NotNull
+//    private Date registered = new Date();
+
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
@@ -42,13 +53,9 @@ public class User extends AbstractNamedEntity {
 
 
 
-
-
-
-
-
     public User() {
     }
+
 
     public User(User u) {
         this(u.getId(), u.getName(), u.getEmail(), u.getRoles());
@@ -58,6 +65,7 @@ public class User extends AbstractNamedEntity {
         this(id, name, email, EnumSet.of(role, roles));
     }
 
+
     public User(Integer id, String name, String email, Collection<Role> roles) {
         super(id, name);
         this.email = email;
@@ -65,11 +73,11 @@ public class User extends AbstractNamedEntity {
     }
 
 
-    public User(@Email @Size(max = 100) String email, Set<Role> roles, Set<Book> books) {
-        this.email = email;
-        this.roles = roles;
+    public User(Integer id, String name, String email, Set<Role> roles, Set<Book> books) {
+        this(id, name, email, roles);
         this.books = books;
     }
+
 
 
     public String getEmail() {
